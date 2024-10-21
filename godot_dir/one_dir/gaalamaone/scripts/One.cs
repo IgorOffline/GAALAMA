@@ -2,10 +2,13 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using GaalamaBusiness.BusinessMain;
+using GaalamaBusiness.BusinessMain.BusinessLogging;
+using GaalamaOne.scripts;
 
 public partial class One : Node2D
 {
-	private readonly Dictionary<string, PackedScene?> _packedScenes = [];
+	private readonly ILogger _logger = new GdLogger();
+	private readonly Dictionary<string, GdSceneExtended> _packedScenes = [];
 	
 	private const string IconSceneName = "iconScene";
 
@@ -33,7 +36,7 @@ public partial class One : Node2D
 			GD.Print("<GAALAMA_EXEC>");
 			try
 			{
-				var listenerImpl = new GaalamaExec();
+				var listenerImpl = new GaalamaExec(_logger);
 				listenerImpl.Execute();
 			}
 			catch (Exception ex)
@@ -56,13 +59,17 @@ public partial class One : Node2D
 	private void ShouldInit()
 	{
 		var iconScene = GD.Load<PackedScene>("res://scenes/icon.tscn");
-		_packedScenes[IconSceneName] = iconScene;
+		_packedScenes[IconSceneName] = new GdSceneExtended(iconScene, SceneType.Node2D);
 	}
 
 	private void FirstDraw()
 	{
-		var newIcon = _packedScenes[IconSceneName]!.Instantiate<Node2D>();
-		newIcon.Position = new Vector2(325F, 125F);
-		AddChild(newIcon);
+		var packedScene = _packedScenes[IconSceneName]!;
+		if (packedScene.SceneType == SceneType.Node2D)
+		{
+			var newIcon = packedScene.PackedScene.Instantiate<Node2D>();
+			newIcon.Position = new Vector2(325F, 125F);
+			AddChild(newIcon);
+		}
 	}
 }
