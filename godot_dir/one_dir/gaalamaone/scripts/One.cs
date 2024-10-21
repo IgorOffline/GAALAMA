@@ -9,6 +9,7 @@ public partial class One : Node2D
 	private const string IconSceneName = "iconScene";
 
 	private bool _shouldInit = true;
+	private bool _doGaalamaExec;
 	
 	public override void _Ready()
 	{
@@ -24,6 +25,21 @@ public partial class One : Node2D
 			FirstDraw();
 			
 			_shouldInit = false;
+		}
+
+		if (_doGaalamaExec)
+		{
+			GD.Print("<GAALAMA_EXEC>");
+			
+			_doGaalamaExec = false;
+		}
+	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("gaalama_exec"))
+		{
+			_doGaalamaExec = true;
 		}
 	}
 
