@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using GaalamaBusiness.BusinessMain;
 
 public partial class One : Node2D
 {
@@ -30,6 +31,15 @@ public partial class One : Node2D
 		if (_doGaalamaExec)
 		{
 			GD.Print("<GAALAMA_EXEC>");
+			try
+			{
+				var listenerImpl = new GaalamaExec();
+				listenerImpl.Execute();
+			}
+			catch (Exception ex)
+			{
+				GD.Print(ex.Message);
+			}
 			
 			_doGaalamaExec = false;
 		}

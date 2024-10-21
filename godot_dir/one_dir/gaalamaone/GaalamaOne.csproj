@@ -7,4 +7,20 @@
     <LangVersion>12</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="GaalamaBusiness\BusinessGenerated\**" />
+    <Compile Remove="GaalamaBusiness\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="GaalamaBusiness\BusinessGenerated\**" />
+    <EmbeddedResource Remove="GaalamaBusiness\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GaalamaBusiness\GaalamaBusiness.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
