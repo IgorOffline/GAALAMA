@@ -1,1 +1,15 @@
 java_antlr_dir/antlr.zip
+
+java_antlr_dir/antlr/src/main/antlr/GaalamaGrammar.interp
+java_antlr_dir/antlr/src/main/antlr/GaalamaGrammar.tokens
+java_antlr_dir/antlr/src/main/antlr/GaalamaGrammarBaseListener.cs
+java_antlr_dir/antlr/src/main/antlr/GaalamaGrammarLexer.cs
+java_antlr_dir/antlr/src/main/antlr/GaalamaGrammarLexer.interp
+java_antlr_dir/antlr/src/main/antlr/GaalamaGrammarLexer.tokens
+java_antlr_dir/antlr/src/main/antlr/GaalamaGrammarListener.cs
+java_antlr_dir/antlr/src/main/antlr/GaalamaGrammarParser.cs
+
+antlr-*-complete.jar
+BusinessGenerated
+Debug
+obj

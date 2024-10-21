@@ -2,6 +2,8 @@
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaalamaOne", "GaalamaOne.csproj", "{A5056078-3CFB-407A-B3DC-F7F060B04F47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaalamaBusiness", "..\GaalamaBusiness\GaalamaBusiness.csproj", "{CE63906E-322D-47CC-B9D0-091474B2FFB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 	Debug|Any CPU = Debug|Any CPU
@@ -15,5 +17,11 @@ Global
 		{A5056078-3CFB-407A-B3DC-F7F060B04F47}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{A5056078-3CFB-407A-B3DC-F7F060B04F47}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{A5056078-3CFB-407A-B3DC-F7F060B04F47}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{CE63906E-322D-47CC-B9D0-091474B2FFB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE63906E-322D-47CC-B9D0-091474B2FFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE63906E-322D-47CC-B9D0-091474B2FFB9}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE63906E-322D-47CC-B9D0-091474B2FFB9}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{CE63906E-322D-47CC-B9D0-091474B2FFB9}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE63906E-322D-47CC-B9D0-091474B2FFB9}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
