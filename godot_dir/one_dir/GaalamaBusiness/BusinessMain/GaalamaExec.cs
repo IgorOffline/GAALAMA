@@ -1,14 +1,15 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using GaalamaBusiness.BusinessGenerated;
+using GaalamaBusiness.BusinessMain.BusinessLogging;
 
 namespace GaalamaBusiness.BusinessMain;
 
-public class GaalamaExec
+public class GaalamaExec(ILogger logger)
 {
     public void Execute()
     {
-        var listener = new GaalamaGrammarListenerImpl();
+        var listener = new GaalamaGrammarListenerImpl(logger);
 
         var lexer = new GaalamaGrammarLexer(new AntlrFileStream("input.txt"));
         var tokens = new CommonTokenStream(lexer);

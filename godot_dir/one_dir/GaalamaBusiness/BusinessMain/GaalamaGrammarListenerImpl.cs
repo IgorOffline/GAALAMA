@@ -1,10 +1,11 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using GaalamaBusiness.BusinessGenerated;
+using GaalamaBusiness.BusinessMain.BusinessLogging;
 
 namespace GaalamaBusiness.BusinessMain;
 
-public class GaalamaGrammarListenerImpl : IGaalamaGrammarListener
+public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListener
 {
     public void VisitTerminal(ITerminalNode node)
     {
@@ -28,7 +29,7 @@ public class GaalamaGrammarListenerImpl : IGaalamaGrammarListener
 
     public void EnterGaalamaexec(GaalamaGrammarParser.GaalamaexecContext context)
     {
-        Console.WriteLine("Enter GaalamaExec");
+        logger.Print("Enter GaalamaExec");
     }
 
     public void ExitGaalamaexec(GaalamaGrammarParser.GaalamaexecContext context)
