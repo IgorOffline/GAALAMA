@@ -1,3 +1,3 @@
 namespace GaalamaBridge.BridgeMain;
 
-public record GdSceneId(long Val);
+public record GdLongId(long Val);

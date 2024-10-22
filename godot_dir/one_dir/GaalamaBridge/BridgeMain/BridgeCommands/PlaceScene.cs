@@ -5,21 +5,32 @@ namespace GaalamaBridge.BridgeMain.BridgeCommands;
 
 public class PlaceScene(GdMaster master, Node parent, string sceneName) : ICommand
 {
+    private GdLongId _sceneId = new(-1);
+    
     public void Execute()
     {
         var packedScene = master.PackedScenes[sceneName];
         if (packedScene.SceneType == SceneType.Node2D)
         {
             var newChild = packedScene.PackedScene.Instantiate<Node2D>();
-            newChild.Name = sceneName + "_" + master.GetAndIncrementNextId();
+            _sceneId = new GdLongId(master.GetAndIncrementNextId());
+            newChild.Name = sceneName + "_" + _sceneId.Val;
             newChild.Position = new Vector2(325F, 125F);
             parent.AddChild(newChild);
-            master.PackedScenes[sceneName] = packedScene with { SceneId = new GdSceneId(master.GetNextId()) };
+            master.PackedScenes[sceneName] = packedScene with { SceneId = new GdLongId(_sceneId.Val) };
         }
     }
 
     public void Undo()
     {
-        //
+        foreach (var child in parent.GetChildren())
+        {
+            if (child.Name.ToString().EndsWith("_" + _sceneId.Val))
+            {
+                master.Logger.Print("Removing: " + _sceneId.Val);
+                parent.RemoveChild(child);
+                child.QueueFree();
+            }
+        }
     }
 }
