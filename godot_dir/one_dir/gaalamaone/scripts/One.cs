@@ -1,11 +1,13 @@
 using Godot;
 using System;
 using GaalamaBridge.BridgeMain;
+using GaalamaBridge.BridgeMain.BridgeCommands;
 using GaalamaBusiness.BusinessMain;
 
 public partial class One : Node2D
 {
 	private GdMaster? _master;
+	private PlaceScene _placeScene;
 	
 	private const string IconSceneName = "iconScene";
 
@@ -50,6 +52,7 @@ public partial class One : Node2D
 			try
 			{
 				_master.GaalamaExec.Undo();
+				UndoFirstDraw();
 			}
 			catch (Exception ex)
 			{
@@ -79,23 +82,25 @@ public partial class One : Node2D
 		
 		var iconScene = GD.Load<PackedScene>("res://scenes/icon.tscn");
 		_master.PackedScenes[IconSceneName] = new GdSceneExtended(iconScene, SceneType.Node2D, new GdSceneId(-1));
+
+		_placeScene = new PlaceScene(_master, this, IconSceneName);
 	}
 
 	private void FirstDraw()
 	{
-		var packedScene = _master!.PackedScenes[IconSceneName];
-		if (packedScene.SceneType == SceneType.Node2D)
-		{
-			var newIcon = packedScene.PackedScene.Instantiate<Node2D>();
-			newIcon.Name = IconSceneName + "_" + _master.GetAndIncrementNextId();
-			newIcon.Position = new Vector2(325F, 125F);
-			AddChild(newIcon);
-			_master.PackedScenes[IconSceneName] = packedScene with { SceneId = new GdSceneId(_master.GetNextId()) };
-		}
+		_placeScene.Execute();
 	}
 
 	private void UndoFirstDraw()
 	{
-		//
+		foreach (var child in GetChildren())
+		{
+			_master!.Logger.Print(child.Name);
+			
+			if (child.Name.ToString().EndsWith("_" + _master.GetNextId()))
+			{
+				_master.Logger.Print("" + _master!.GetNextId());
+			}
+		}
 	}
 }

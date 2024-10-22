@@ -17,6 +17,6 @@ public class GdMaster(ILogger logger, GaalamaExec gaalamaExec)
     
     public long GetAndIncrementNextId()
     {
-        return _nextId++;
+        return ++_nextId;
     }
 }
