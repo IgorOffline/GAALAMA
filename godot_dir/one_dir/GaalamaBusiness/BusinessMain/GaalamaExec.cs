@@ -18,4 +18,9 @@ public class GaalamaExec(ILogger logger)
         var walker = new ParseTreeWalker();
         walker.Walk(listener, tree);
     }
+
+    public void Undo()
+    {
+        //
+    }
 }

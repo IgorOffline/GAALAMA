@@ -8,11 +8,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GaalamaBusiness\GaalamaBusiness.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GaalamaBridge\GaalamaBridge.csproj" />
   </ItemGroup>
 </Project>
