@@ -7,7 +7,6 @@ using GaalamaBusiness.BusinessMain;
 public partial class One : Node2D
 {
 	private GdMaster? _master;
-	private PlaceScene? _placeScene;
 	
 	private const string IconSceneName = "iconScene";
 
@@ -35,7 +34,7 @@ public partial class One : Node2D
 			try
 			{
 				_master.GaalamaExec.Execute();
-				_placeScene!.Execute();
+				_master.Commander.Execute(new PlaceScene(_master, this, IconSceneName));
 			}
 			catch (Exception ex)
 			{
@@ -51,7 +50,7 @@ public partial class One : Node2D
 			try
 			{
 				_master.GaalamaExec.Undo();
-				_placeScene!.Undo();
+				_master.Commander.Undo();
 			}
 			catch (Exception ex)
 			{
@@ -77,11 +76,9 @@ public partial class One : Node2D
 	private void ShouldInit()
 	{
 		var logger = new GdLogger();
-		_master = new GdMaster(logger, new GaalamaExec(logger));
+		_master = new GdMaster(logger, new GaalamaExec(logger), new GdCommander(logger));
 		
 		var iconScene = GD.Load<PackedScene>("res://scenes/icon.tscn");
 		_master.PackedScenes[IconSceneName] = new GdSceneExtended(iconScene, SceneType.Node2D, new GdLongId(-1));
-
-		_placeScene = new PlaceScene(_master, this, IconSceneName);
 	}
 }
