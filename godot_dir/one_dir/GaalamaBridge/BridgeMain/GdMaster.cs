@@ -3,19 +3,20 @@ using GaalamaBusiness.BusinessMain.BusinessLogging;
 
 namespace GaalamaBridge.BridgeMain;
 
-public class GdMaster(ILogger logger, GaalamaExec gaalamaExec)
+public class GdMaster(ILogger logger, GaalamaExec gaalamaExec, GdCommander commander)
 {
     public ILogger Logger => logger;
     public GaalamaExec GaalamaExec => gaalamaExec;
+    public GdCommander Commander => commander;
     public readonly Dictionary<string, GdSceneExtended> PackedScenes = [];
-    private long _nextId;
+    private static long _nextId;
 
-    public long GetNextId()
+    public static long GetNextId()
     {
         return _nextId;
     }
     
-    public long GetAndIncrementNextId()
+    public static long GetAndIncrementNextId()
     {
         return ++_nextId;
     }

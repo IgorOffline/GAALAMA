@@ -13,9 +13,8 @@ public class PlaceScene(GdMaster master, Node parent, string sceneName) : IComma
         if (packedScene.SceneType == SceneType.Node2D)
         {
             var newChild = packedScene.PackedScene.Instantiate<Node2D>();
-            _sceneId = new GdLongId(master.GetAndIncrementNextId());
+            _sceneId = new GdLongId(GdMaster.GetAndIncrementNextId());
             newChild.Name = sceneName + "_" + _sceneId.Val;
-            newChild.Position = new Vector2(325F, 125F);
             parent.AddChild(newChild);
             master.PackedScenes[sceneName] = packedScene with { SceneId = new GdLongId(_sceneId.Val) };
         }
