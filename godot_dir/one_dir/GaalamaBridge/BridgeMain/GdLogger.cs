@@ -1,7 +1,7 @@
 using GaalamaBusiness.BusinessMain.BusinessLogging;
 using Godot;
 
-namespace GaalamaOne.scripts;
+namespace GaalamaBridge.BridgeMain;
 
 public class GdLogger : ILogger
 {
