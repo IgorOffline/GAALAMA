@@ -37,6 +37,26 @@ public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListene
         //
     }
 
+    public void EnterGaalamadi(GaalamaGrammarParser.GaalamadiContext context)
+    {
+        logger.Print("Enter GaalamaDi");
+    }
+
+    public void ExitGaalamadi(GaalamaGrammarParser.GaalamadiContext context)
+    {
+        //
+    }
+
+    public void EnterGaalamado(GaalamaGrammarParser.GaalamadoContext context)
+    {
+        logger.Print("Enter GaalamaDo");
+    }
+
+    public void ExitGaalamado(GaalamaGrammarParser.GaalamadoContext context)
+    {
+        //
+    }
+
     public void EnterGaalamamain(GaalamaGrammarParser.GaalamamainContext context)
     {
         //
