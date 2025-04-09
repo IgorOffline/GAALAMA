@@ -1,3 +1,4 @@
+using System.Numerics;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using GaalamaBusiness.BusinessGenerated;
@@ -7,6 +8,9 @@ namespace GaalamaBusiness.BusinessMain;
 
 public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListener
 {
+    public GaalamaVariable LastVariable { get; set; } = GaalamaUtil.GaalamaVariableDefault();
+    public Dictionary<string, GaalamaVariable> Values { get; set; } = new();
+    
     public void VisitTerminal(ITerminalNode node)
     {
         //
@@ -42,12 +46,12 @@ public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListene
         logger.Print("Enter GaalamaVarname");
 
         var varname = context.children.First().GetText()!;
-        logger.Print($"Varname= {varname}");
+        LastVariable = LastVariable with { Name = varname };
     }
 
     public void ExitGaalamavarname(GaalamaGrammarParser.GaalamavarnameContext context)
     {
-        //
+        logger.Print($"LastVariable= {LastVariable}");
     }
 
     public void EnterGaalamainit(GaalamaGrammarParser.GaalamainitContext context)
@@ -63,6 +67,8 @@ public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListene
     public void EnterGaalamabigint(GaalamaGrammarParser.GaalamabigintContext context)
     {
         logger.Print("Enter GaalamaBigint");
+
+        LastVariable = new GaalamaVariable(GaalamaType.Bigint, GaalamaUtil.GaalamaVariableDefaultName, BigInteger.Zero);
     }
 
     public void ExitGaalamabigint(GaalamaGrammarParser.GaalamabigintContext context)
