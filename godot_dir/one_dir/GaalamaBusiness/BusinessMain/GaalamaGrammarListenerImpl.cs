@@ -41,6 +41,20 @@ public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListene
         //
     }
 
+    public void EnterGaalamaint(GaalamaGrammarParser.GaalamaintContext context)
+    {
+        logger.Print("Enter GaalamaInt");
+        
+        var intvalue = context.children.First().GetText()!;
+        //logger.Print($"IntValue= {intvalue}");
+        LastVariable = LastVariable with { Value = BigInteger.Parse(intvalue) };
+    }
+
+    public void ExitGaalamaint(GaalamaGrammarParser.GaalamaintContext context)
+    {
+        PrintLastVariable();
+    }
+
     public void EnterGaalamavarname(GaalamaGrammarParser.GaalamavarnameContext context)
     {
         logger.Print("Enter GaalamaVarname");
@@ -51,7 +65,22 @@ public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListene
 
     public void ExitGaalamavarname(GaalamaGrammarParser.GaalamavarnameContext context)
     {
+        PrintLastVariable();
+    }
+
+    private void PrintLastVariable()
+    {
         logger.Print($"LastVariable= {LastVariable}");
+    }
+
+    public void EnterGaalamaequals(GaalamaGrammarParser.GaalamaequalsContext context)
+    {
+        logger.Print("Enter GaalamaEquals");
+    }
+
+    public void ExitGaalamaequals(GaalamaGrammarParser.GaalamaequalsContext context)
+    {
+        //
     }
 
     public void EnterGaalamainit(GaalamaGrammarParser.GaalamainitContext context)
@@ -102,6 +131,16 @@ public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListene
     }
 
     public void ExitGaalamainitbigint(GaalamaGrammarParser.GaalamainitbigintContext context)
+    {
+        //
+    }
+
+    public void EnterGaalamainitbigintset(GaalamaGrammarParser.GaalamainitbigintsetContext context)
+    {
+        //
+    }
+
+    public void ExitGaalamainitbigintset(GaalamaGrammarParser.GaalamainitbigintsetContext context)
     {
         //
     }
