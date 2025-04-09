@@ -37,6 +37,39 @@ public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListene
         //
     }
 
+    public void EnterGaalamavarname(GaalamaGrammarParser.GaalamavarnameContext context)
+    {
+        logger.Print("Enter GaalamaVarname");
+
+        var varname = context.children.First().GetText()!;
+        logger.Print($"Varname= {varname}");
+    }
+
+    public void ExitGaalamavarname(GaalamaGrammarParser.GaalamavarnameContext context)
+    {
+        //
+    }
+
+    public void EnterGaalamainit(GaalamaGrammarParser.GaalamainitContext context)
+    {
+        logger.Print("Enter GaalamaInit");
+    }
+
+    public void ExitGaalamainit(GaalamaGrammarParser.GaalamainitContext context)
+    {
+        //
+    }
+
+    public void EnterGaalamabigint(GaalamaGrammarParser.GaalamabigintContext context)
+    {
+        logger.Print("Enter GaalamaBigint");
+    }
+
+    public void ExitGaalamabigint(GaalamaGrammarParser.GaalamabigintContext context)
+    {
+        //
+    }
+
     public void EnterGaalamadi(GaalamaGrammarParser.GaalamadiContext context)
     {
         logger.Print("Enter GaalamaDi");
@@ -53,6 +86,16 @@ public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListene
     }
 
     public void ExitGaalamado(GaalamaGrammarParser.GaalamadoContext context)
+    {
+        //
+    }
+
+    public void EnterGaalamainitbigint(GaalamaGrammarParser.GaalamainitbigintContext context)
+    {
+        logger.Print("Enter GaalamaInitbigint");
+    }
+
+    public void ExitGaalamainitbigint(GaalamaGrammarParser.GaalamainitbigintContext context)
     {
         //
     }
