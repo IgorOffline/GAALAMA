@@ -1,1 +1,8 @@
 GAALAMA EXEC
+DI DO
+INIT BIGINT first
+INIT BIGINT second = 5
+second -= 1
+second -= 1
+second -= 1
+DO DI
