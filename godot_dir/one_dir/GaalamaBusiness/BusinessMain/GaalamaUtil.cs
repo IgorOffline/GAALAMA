@@ -8,4 +8,9 @@ public class GaalamaUtil
     {
         return new GaalamaVariable(GaalamaType.Object, GaalamaVariableDefaultName, null);
     }
+
+    public static GaalamaOperation GaalamaOperationDefault()
+    {
+        return new GaalamaOperation(GaalamaOperator.None);
+    }
 }

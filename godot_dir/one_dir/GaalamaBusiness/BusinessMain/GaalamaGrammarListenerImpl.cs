@@ -9,6 +9,7 @@ namespace GaalamaBusiness.BusinessMain;
 public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListener
 {
     public GaalamaVariable LastVariable { get; set; } = GaalamaUtil.GaalamaVariableDefault();
+    public GaalamaOperation LastOperation { get; set; } = GaalamaUtil.GaalamaOperationDefault();
     public Dictionary<string, GaalamaVariable> Values { get; set; } = new();
     
     public void VisitTerminal(ITerminalNode node)
@@ -47,7 +48,30 @@ public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListene
         
         var intvalue = context.children.First().GetText()!;
         //logger.Print($"IntValue= {intvalue}");
-        LastVariable = LastVariable with { Value = BigInteger.Parse(intvalue) };
+        
+        switch (LastOperation.Operator)
+        {
+            case GaalamaOperator.None:
+                logger.Print("LastOperationOperator= None");
+                break;
+            case GaalamaOperator.Set:
+                logger.Print("LastOperationOperator= Set");
+                LastVariable = LastVariable with { Value = BigInteger.Parse(intvalue) };
+                break;
+            case GaalamaOperator.Add:
+                logger.Print("LastOperationOperator= Add");
+                break;
+            case GaalamaOperator.Subtract:
+                logger.Print("LastOperationOperator= Subtract");
+                var subtract = (BigInteger) LastVariable.Value;
+                subtract -= 1;
+                LastVariable = LastVariable with { Value = subtract };
+                //LastVariable = LastVariable with { Value = Value. };
+                break;
+            default:
+                logger.Print("LastOperationOperator= Unknown");
+                break;
+        }
     }
 
     public void ExitGaalamaint(GaalamaGrammarParser.GaalamaintContext context)
@@ -83,9 +107,33 @@ public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListene
         //
     }
 
+    public void EnterGaalamaaddoperator(GaalamaGrammarParser.GaalamaaddoperatorContext context)
+    {
+        logger.Print("Enter GaalamaAddoperator");
+    }
+
+    public void ExitGaalamaaddoperator(GaalamaGrammarParser.GaalamaaddoperatorContext context)
+    {
+        //
+    }
+
+    public void EnterGaalamasubtractoperator(GaalamaGrammarParser.GaalamasubtractoperatorContext context)
+    {
+        logger.Print("Enter GaalamaSubtractoperator");
+        
+        LastOperation = new GaalamaOperation(GaalamaOperator.Subtract);
+    }
+
+    public void ExitGaalamasubtractoperator(GaalamaGrammarParser.GaalamasubtractoperatorContext context)
+    {
+        //
+    }
+
     public void EnterGaalamainit(GaalamaGrammarParser.GaalamainitContext context)
     {
         logger.Print("Enter GaalamaInit");
+
+        LastOperation = new GaalamaOperation(GaalamaOperator.Set);
     }
 
     public void ExitGaalamainit(GaalamaGrammarParser.GaalamainitContext context)
@@ -141,6 +189,16 @@ public class GaalamaGrammarListenerImpl(ILogger logger) : IGaalamaGrammarListene
     }
 
     public void ExitGaalamainitbigintset(GaalamaGrammarParser.GaalamainitbigintsetContext context)
+    {
+        //
+    }
+
+    public void EnterGaalamasubtract(GaalamaGrammarParser.GaalamasubtractContext context)
+    {
+        logger.Print("Enter GaalamaSubtract");
+    }
+
+    public void ExitGaalamasubtract(GaalamaGrammarParser.GaalamasubtractContext context)
     {
         //
     }
